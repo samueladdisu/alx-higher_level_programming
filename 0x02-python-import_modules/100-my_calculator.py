@@ -2,8 +2,8 @@
 if __name__ == "__main__":
     import sys
     from calculator_1 import add, sub, mul, div
-    length = len(sys.argv)
-    if length < 4:
+    length = len(sys.argv) - 1
+    if length != 3:
         print("Usage: ./100-my_calculator.py <a> <op> <b>")
         exit(1)
     else:
