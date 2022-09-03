@@ -10,15 +10,15 @@ if __name__ == "__main__":
         a = int(sys.argv[1])
         b = int(sys.argv[3])
         op = sys.argv[2]
-        match op:
-            case '+':
-                print("{:d} + {:d} = {:d}".format(a, b, add(a, b)))
-            case '-':
-                print("{:d} - {:d} = {:d}".format(a, b, sub(a, b)))
-            case '*':
-                print("{:d} * {:d} = {:d}".format(a, b, mul(a, b)))
-            case '/':
-                print("{:d} / {:d} = {:d}".format(a, b, div(a, b)))
-            case _:
-                print("Unknown operator. Available operators: +, -, * and /")
-                exit(1)
+
+        if op == '+':
+            print("{:d} + {:d} = {:d}".format(a, b, add(a, b)))
+        elif op == '-':
+            print("{:d} - {:d} = {:d}".format(a, b, sub(a, b)))
+        elif op == '*':
+            print("{:d} * {:d} = {:d}".format(a, b, mul(a, b)))
+        elif op == '/':
+            print("{:d} / {:d} = {:d}".format(a, b, div(a, b)))
+        else:
+            print("Unknown operator. Available operators: +, -, * and /")
+            exit(1)
