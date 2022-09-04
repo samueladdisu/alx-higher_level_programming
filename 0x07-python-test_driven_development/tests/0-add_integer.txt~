@@ -1,0 +1,73 @@
+#Testing Module add_integer
+
+::
+
+	>>> add_integer = __import__('0-add_integer').add_integer
+
+Test for two integer -> Normal Condition
+
+::
+     >>> add_integer(7, 9)
+     16
+
+Test for two floats
+
+::
+     >>> add_integer(2.1, 3.1)
+     5
+
+Test for invalid type of operands ->  raise TypeError
+
+::
+
+     >>> add_integer(True, False) #doctest: +IGNORE_EXCEPTION_DETAIL
+     Traceback (most recent call last):
+     ...
+     TypeError: a must be an integer
+     >>> add_integer(2, False) #doctest: +IGNORE_EXCEPTION_DETAIL
+     Traceback (most recent call last):
+     TypeError: b must be an integer
+
+Test for negative
+
+::
+
+     >>> add_integer(-4, -4)
+     -8
+     >>> add_integer(-9.0, -1.0)
+     -10
+
+
+Test For None Value
+::
+
+     >>> add_integer(None, None)
+     Traceback (most recent call last):
+     TypeError: a must be an integer
+
+     >>> add_integer(2, None)
+     Traceback (most recent call last):
+     TypeError: b must be an integer
+
+Test for OverFlow(Large Number)
+
+::
+     >>> add_integer(2, float('inf'))
+     Traceback (most recent call last):
+     OverflowError: cannot convert float infinity to integer
+
+     >>> add_integer(float('inf'))
+     Traceback (most recent call last):
+     OverflowError: cannot convert float infinity to integer
+
+
+Test for NaN
+::
+
+     >>> add_integer(2, float('NaN'))
+     Traceback (most recent call last):
+     ValueError: cannot convert float NaN to integer
+
+     >>> add_integer(float('NaN'))
+     Traceback (most recent call last):
+     ValueError: cannot convert float NaN to integer

@@ -1,0 +1,27 @@
+Test Document For print_square Module
+
+import Module
+       >>> print_sq = __import__('4-print_square').print_square
+
+Test Form Normal Condtion:
+     >>> print_sq(4)
+     ####
+     ####
+     ####
+     ####
+
+Test For non integer size:
+     >>> print_sq(4.6)
+     Traceback (most recent call last):
+     TypeError: size must be an integer
+     >>> print_sq(None)
+     Traceback (most recent call last):
+     TypeError: size must be an integer
+     >>> print_sq("str")
+     Traceback (most recent call last):
+     TypeError: size must be an integer
+
+Test For size  < 0:
+     >>> print_sq(-1)
+     Traceback (most recent call last):
+     ValueError: size must be >= 0

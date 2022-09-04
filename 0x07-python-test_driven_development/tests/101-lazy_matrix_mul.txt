@@ -1,0 +1,160 @@
+Test Doc For matrix multipliation module
+
+::
+
+	>>> import numpy as np
+        >>> mat_mul = __import__('101-lazy_matrix_mul').lazy_matrix_mul
+
+Test for Normal Condtion column of first matrix == row second matrix
+
+::
+
+     >>> a = [[1, 2], [2, 1]]
+     >>> b = [[2], [3]]
+     >>> mat_mul(a, b) #doctest: +NORMALIZE_WHITESPACE
+     array([[8], [7]])
+     >>> a = [[2, 2, 2], [2, 2, 2]]
+     >>> b = [[2, 2], [2, 2], [2, 2]]
+     >>> mat_mul(a, b) #doctest: +NORMALIZE_WHITESPACE
+     array([[12, 12], [12, 12]])
+
+Test for type(a)  or type(b) not a list
+
+::
+
+     >>> a = "Holberton"
+     >>> b = [[4, 9], [4, 9]]
+     >>> mat_mul(a, b)
+     Traceback (most recent call last):
+     TypeError: m_a must be a list
+     >>> a = [[4, 5], [7, 8]]
+     >>> b = "hol"
+     >>> mat_mul(a, b)
+     Traceback (most recent call last):
+     TypeError: m_b must be a list
+     >>> a = [4, 7, 9]
+     >>> b = [[4, 7], [9, 8]]
+     >>> mat_mul(a, b)
+     Traceback (most recent call last):
+     TypeError: m_a must be a list of lists
+     >>> a =[[3, 4], [6, 8]]
+     >>> b = [3, 5, 7]
+     >>> mat_mul(a, b)
+     Traceback (most recent call last):
+     TypeError: m_b must be a list of lists
+
+Test for empty List
+
+::
+
+     >>> a = [[]]
+     >>> b = [[7, 7], [8, 8]]
+     >>> mat_mul(a, b)
+     Traceback (most recent call last):
+     ValueError: m_a can't be empty
+     >>> b =[[]]
+     >>> a = [[4, 6], [6, 8]]
+     >>> mat_mul(a, b)
+     Traceback (most recent call last):
+     ValueError: m_b can't be empty
+     >>> a =[[8, 9]]
+     >>> mat_mul(a, b)
+     Traceback (most recent call last):
+     ValueError: m_b can't be empty
+
+Test for type of  elements (not integer or float)
+
+::
+
+     >>> a = [[3, "a", "Hello"], ["hello", 7, 9]]
+     >>> b = [[3, 5], [5, 8]]
+     >>> mat_mul(a, b)
+     Traceback (most recent call last):
+     TypeError: m_a should contain only integers or floats
+     >>> b =[["a", "test"], [8, 0]]
+     >>> a = [["a", "a"], [4, 6]]
+     >>> mat_mul(a, b)
+     Traceback (most recent call last):
+     TypeError: m_a should contain only integers or floats
+     >>> a = [[6, 8], [9, 0]]
+     >>> b = [["a", "h"], [6, 9]]
+     >>> mat_mul(a, b) #doctest: +IGNORE_EXCEPTION_DETAIL
+     Traceback (most recent call last):
+     TypeError: m_b should contain only integers or floats
+
+Test for different row size
+
+::
+
+     >>> a = [[3, 5, 5], [4, 5]]
+     >>> b = [[3, 4], [5, 6]]
+     >>> mat_mul(a, b)
+     Traceback (most recent call last):
+     TypeError: each row of m_a must be of the same size
+     >>> a = [[4, 5], [4, 7]]
+     >>> b = [[4, 6], [5, 6, 9]]
+     >>> mat_mul(a, b) #doctest: +IGNORE_EXCEPTION_DETAIL
+     Traceback (most recent call last):
+     ...
+     TypeError: each row of m_b must be of the same size
+
+When both a and be are of different size
+
+::
+
+     >>> b = [[3, 5], [6, 6, 9]]
+     >>> a = [[3, 6], [7, 7, 9]]
+     >>> mat_mul(a, b)
+     Traceback (most recent call last):
+     TypeError: each row of m_a must be of the same size
+     >>> a = [[3, 5], [6, 9]]
+     >>> b = [[3, 5, 6], [5, 7]]
+     >>> mat_mul(a, b)
+     Traceback (most recent call last):
+     TypeError: each row of m_b must be of the same size
+
+Test for imcompatiple matrix colA != rowB for AxB
+
+::
+
+     >>> a = [[3, 4], [4, 4]]
+     >>> b = [[2, 5], [4, 6], [7, 9]]
+     >>> mat_mul(a, b)
+     Traceback (most recent call last):
+     ValueError: m_a and m_b can't be multiplied
+     >>> a = [[2, 4, 5], [4, 8, 9]]
+     >>> b = [[2, 7], [8, 0]]
+     >>> mat_mul(a, b)
+     Traceback (most recent call last):
+     ValueError: m_a and m_b can't be multiplied
+ 
+     
+Test For Large Numbers
+
+::
+
+     >>> a = [[float('inf'), 7], [float('inf'), float('inf')]]
+     >>> b = [[2, float('inf')], [float('inf'), float('inf')]]
+     >>> mat_mul(a, b) #doctest: +NORMALIZE_WHITESPACE
+     array([[inf, inf], [inf, inf]])
+
+Test For NaN
+
+::
+
+     >>> a = [[float('NaN')]]
+     >>> b = [[float('NaN')]]
+     >>> mat_mul(a, b)
+     array([[nan]])
+
+Test for missing arguments
+
+::
+	>>> a = [[3, 4], [5, 6]]
+	>>> mat_mul(a) #doctest: +IGNORE_EXCEPTION_DETAIL
+	Traceback (most recent call last):
+	TypeError: matrix_mul() missing 1 required positional argument: 'm_b'
+	>>> mat_mul() #doctest: +IGNORE_EXCEPTION_DETAIL
+	Traceback (most recent call last):
+	TypeError: matrix_mul() missing 2 required positional arguments: 'm_a', 'm_b'
+	
