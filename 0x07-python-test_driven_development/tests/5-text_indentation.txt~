@@ -1,0 +1,31 @@
+Text Indentation module Test Docs
+
+import function:
+       >>> txt_ind = __import__('5-text_indentation').text_indentation
+
+Test for Normal Condition:
+     >>> txt_ind("abc.efg?hij:test")
+     abc.
+     <BLANKLINE>
+     efg?
+     <BLANKLINE>
+     hij:
+     <BLANKLINE>
+     test
+
+Test for non string input:
+     >>> txt_ind(6)
+     Traceback (most recent call last):
+     TypeError: text must be a string
+     >>> txt_ind(None)
+     Traceback (most recent call last):
+     TypeError: text must be a string
+     >>> txt_ind(float('inf'))
+     Traceback (most recent call last):
+     TypeError: text must be a string
+
+Test for space after speial chars:
+     >>> txt_ind("abc:  efg")
+     abc:
+     <BLANKLINE>
+     efg

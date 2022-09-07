@@ -1,0 +1,21 @@
+#!/usr/bin/python3
+
+"""
+Unittest for max_integer
+"""
+import unittest
+max_int = __import__('6-max_integer').max_integer
+
+
+class TestMaxInteger(unittest.TestCase):
+
+    """
+    Class for testing max_integer function
+    """
+
+    def test_empty(self):
+
+        """
+        Test for empty list
+        """
+        self.assertEqual(max_int([]), None)

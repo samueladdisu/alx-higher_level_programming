@@ -1,0 +1,73 @@
+This is Test Document for Matrix Divided Module
+
+::
+
+      >>> m_div = __import__('2-matrix_divided').matrix_divided
+
+Test For Ordinary Condition
+
+::
+
+     >>> row = [i*2 for i in range(4)]
+     >>> m = [row for i in range(4)]
+     >>> m_div(m, 2) #doctest: +NORMALIZE_WHITESPACE
+     [[0.0, 1.0, 2.0, 3.0],
+      [0.0, 1.0, 2.0, 3.0],
+      [0.0, 1.0, 2.0, 3.0],
+      [0.0, 1.0, 2.0, 3.0]]
+
+Test for different row size  -> raise TypeError
+::
+
+     >>> row = [i for i in range(4)]
+     >>> m = [row for i in range(3)]
+     >>> m[1] = [i for i in range(5)]
+     >>> m_div(m, 0.5) #doctest: +IGNORE_EXCEPTION_DETAIL
+     Traceback (most recent call last):
+     TypeError: Each row of the matrix must have the same size
+
+Test for Zero Division Error
+
+::
+
+     >>> m = [[2, 5, 6,7] for  i in range(4)]
+     >>> m_div(m, 0) #doctest: +IGNORE_EXCEPTION_DETAIL
+     Traceback (most recent call last):
+     ZeroDivisionError: division by zero
+
+Test for invalid  elements -> raise TypeError
+
+::
+
+     >>> m = [[2, 5, 6,7] for  i in range(4)]
+     >>> m[1] = ["Hello", "Test", "True"]
+     >>> m_div(m, 5) #doctest: +IGNORE_EXCEPTION_DETAIL, +NORMALIZE_WHITESPACE
+     Traceback (most recent call last):
+     TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+Test For invalid div ->  TypeError
+
+::
+
+     >>> m = [[2, 5, 6,7] for  i in range(4)]
+     >>> m_div(m, "Hello") #doctest: +IGNORE_EXCEPTION_DETAIL, +NORMALIZE_WHITESPACE
+     Traceback (most recent call last):
+     TypeError: div must be a number
+
+Test for NaN and Too Large Numbers
+
+::
+
+     >>> m = [[float('NaN'), float('inf')]]
+     >>> m_div(m, 4)
+     [[nan, inf]]
+
+Test for [] case
+
+::
+	>>> m = []
+	>>> m_div(m, 4)
+	Traceback (most recent call last):
+	TypeError: matrix must be a matrix (list of lists) of integers/floats
+	>>> m = [[]]
+	>>> m_div(m ,4)
