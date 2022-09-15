@@ -1,29 +1,22 @@
 #!/usr/bin/python3
-""" List all state objects using sqlalchemy """
+"""
+Relationship in sqlalchemy demo
+"""
 
-from relationship_state import Base, State
-from relationship_city import City
-from sqlalchemy.orm.session import sessionmaker, Session
+import sys
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from sys import argv
+from relationship_state import State
 
 
-if __name__ == '__main__':
-
-    username = argv[1]
-    password = argv[2]
-    db_name = argv[3]
-
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
-                           .format(username, password, db_name))
-
-    Base.metadata.create_all(engine)
-
-    Session = sessionmaker(bind=engine)
-    session = Session()
-
-    for state in session.query(State).\
-            order_by(State.id):
-        print('{}: {}'.format(state.id, state.name))
+if __name__ == "__main__":
+    engine = create_engine(
+        "mysql+mysqldb://{}:{}@localhost:3306/{}".format(
+            sys.argv[1], sys.argv[2],
+            sys.argv[3]), pool_pre_ping=True)
+    session = sessionmaker(bind=engine)()
+    result = session.query(State).order_by(State.id)
+    for state in result:
+        print(f"{state.id}: {state.name}")
         for city in state.cities:
-            print('\t{}: {}'.format(city.id, city.name))
+            print(f"    {city.id}: {city.name}")
